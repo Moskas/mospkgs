@@ -1,0 +1,21 @@
+#+title: My custom/personal packages
+#+options: \n:t
+
+Here are some of my own packages for the software that isn't available in the main repo or that I have had a need to patch/modify.
+
+#+begin_src bash
+echo "Packages:"
+nix flake show --json | nix run nixpkgs#jq -- '.packages.[].[].name' | awk '{ gsub(/"/, ""); print }'
+#+end_src
+
+#+RESULTS:
+| Packages:                 |
+|---------------------------|
+| epy-v2023.6.11            |
+| etterna-0.74.0            |
+| mpd-notify-rs-0.1.3       |
+| osu-lazer-bin-2024.1219.2 |
+| reader-master             |
+| tickrs-0.14.10            |
+| whdl-0.1.1                |
+| zen-browser-1.0.2-b.5     |
