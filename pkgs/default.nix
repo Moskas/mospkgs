@@ -45,5 +45,13 @@
     tickrs = (pkgs.callPackage ./tickrs.nix { });
     zen-browser = (pkgs.callPackage ./zen.nix { }).specific;
     etterna = (pkgs.callPackage ./etterna/etterna.nix { });
+    anifetch = import ./anifetch.nix {
+      inherit
+        pkgs
+        lib
+        system
+        inputs
+        ;
+    };
   };
 }
