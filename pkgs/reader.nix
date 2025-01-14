@@ -4,24 +4,26 @@
   ...
 }:
 
+let
+  version = "0.4.5";
+in
+
 pkgs.buildGoModule {
   pname = "reader";
-  version = "master";
+  inherit version;
 
-  src = pkgs.fetchFromGitHub {
-    owner = "mrusme";
-    repo = "reader";
-    rev = "dc68d3bad967f383a50989dcaf4a07b9ca614bd7";
-    hash = "sha256-oZLQEzqyX4x4ou6GJqCR1D0kZnii9WFU47JOtiLPx+Y=";
+  src = pkgs.fetchurl {
+    url = "https://github.com/mrusme/reader/archive/refs/tags/v${version}.tar.gz";
+    hash = "sha256-Knm0FaQ6hFCquwlFAJJPRk7SqMgTfGTsLFfFBsGRuB8=";
   };
 
-  vendorHash = "sha256-kqRoWl57C2Nwa5xJbC8RQqCHWZNppV6n3GMbRQDAYL8=";
+  vendorHash = "sha256-obYdifg3WrTyxgN/VtzgpL31ZOyPNtVT8UDQts0WodQ=";
 
   meta = with lib; {
     description = "reader is for your command line what the “readability” view is for modern browsers: A lightweight tool offering better readability of web pages on the CLI.";
     longDescription = ''reader is for your command line what the “readability” view is for modern browsers: A lightweight tool offering better readability of web pages on the CLI.'';
     license = licenses.gpl3Plus;
-    maintainers = [ ];
+    maintainers = [ Moskas ];
     platforms = platforms.unix;
     mainProgram = "reader";
   };
