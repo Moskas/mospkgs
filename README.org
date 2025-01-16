@@ -1,0 +1,5 @@
+#+title: mospkgs - Moskas' Packages
+#+author: Moskas
+#+options: \n:t toc:nil
+
+A repo for my custom packages with modules for personal projects or software that isn't packaged in [[https://github.com/NixOS/nixpkgs/][nixpkgs]]/ I want to bump manually to the more recent version.

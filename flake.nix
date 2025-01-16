@@ -1,5 +1,5 @@
 {
-  description = "Moskas' Flake";
+  description = "Moskas' packages and modules flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -13,7 +13,11 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        # Need for packages such as osu-bin
+        config.allowUnfree = true;
+      };
       inherit (nixpkgs) lib;
     in
     {
