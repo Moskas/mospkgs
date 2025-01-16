@@ -29,5 +29,6 @@
           lib
           ;
       };
+      overlays.default = import ./overlays/default.nix;
     };
 }
