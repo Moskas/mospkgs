@@ -45,6 +45,7 @@
     tickrs = (pkgs.callPackage ./tickrs.nix { });
     zen-browser = (pkgs.callPackage ./zen.nix { }).specific;
     etterna = (pkgs.callPackage ./etterna/etterna.nix { });
+    aporetic-sans-mono = (pkgs.callPackage ./fonts/aporetic.nix { });
     anifetch = import ./anifetch.nix {
       inherit
         pkgs
