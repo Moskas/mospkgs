@@ -15,7 +15,8 @@ pkgs.stdenv.mkDerivation pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-VCJsbVvSNcExduk245LUW+pX+kpzVFEVaHtSVgVHEaI=";
   };
 
-  cargoHash = "sha256-1LCQPQiuVZiBa6B7xW6ob5Ts6hCpM6XoRAR5Zagj+6M=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-yTQx4RRf6wVrP3NWCwoeNqTsKDj0SerelZ9I8/wzn3o=";
 
   nativeBuildInputs = [ ];
   buildInputs = [ ];

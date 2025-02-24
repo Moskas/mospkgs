@@ -1,8 +1,5 @@
 {
   lib,
-  #cmake,
-  #pkg-config,
-  #openssl,
   pkgs,
   ...
 }:
@@ -18,7 +15,8 @@ pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-snV/jTn6YagfYH+u7YJB0R5tUQWg5D5UQQPZtjzbQR8=";
   };
 
-  cargoHash = "sha256-K/buXR7JjMC+XHV5K9ikMz8H8RhK6OQ/hF8iNI8BhMI=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-X02+IL7RuEFmIYSSBgYNH1ZAMlkRiFdLg8ySUrynCOQ=";
 
   nativeBuildInputs = with pkgs; [
     cmake
