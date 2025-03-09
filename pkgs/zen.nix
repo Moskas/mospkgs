@@ -1,11 +1,11 @@
 { pkgs, ... }:
 # Most of the code is from https://github.com/MarceColl/zen-browser-flake
 let
-  version = "1.8b";
+  version = "1.8.2b";
   downloadUrl = {
     "specific" = {
       url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
-      sha256 = "sha256:0x034npapnyndflhaiqk8s0wldggs4hlwhnsllq6q4vgcq2l2mwi";
+      sha256 = "sha256:0lqsspqnrp2v6ca6yacx7aq6afqr092q60aas1q6p7p15ky9ip7i";
     };
   };
 
