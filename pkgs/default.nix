@@ -54,5 +54,6 @@
         inputs
         ;
     };
+    nyxt = (pkgs.callPackage ./nyxt {});
   };
 }
