@@ -54,6 +54,7 @@
         inputs
         ;
     };
-    nyxt = (pkgs.callPackage ./nyxt {});
+    nyxt = (pkgs.callPackage ./nyxt { });
+    hakurei-reimu = (pkgs.callPackage ./cursors/reimu.nix { });
   };
 }
