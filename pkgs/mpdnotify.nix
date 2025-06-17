@@ -4,7 +4,7 @@
   ...
 }:
 
-pkgs.stdenv.mkDerivation pkgs.rustPlatform.buildRustPackage rec {
+pkgs.rustPlatform.buildRustPackage rec {
   pname = "mpd-notify-rs";
   version = "0.1.3";
 
