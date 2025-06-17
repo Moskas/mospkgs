@@ -26,7 +26,7 @@ let
     ];
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [
-	Moskas
+      Moskas
     ];
     mainProgram = "osu!";
     platforms = [

@@ -29,6 +29,7 @@
           lib
           ;
       };
-      overlays.default = import ./overlays/default.nix;
+      overlays.default = import ./overlays;
+      formatter."${system}" = pkgs.nixfmt-rfc-style;
     };
 }
