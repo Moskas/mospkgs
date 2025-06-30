@@ -29,6 +29,12 @@
           lib
           ;
       };
+      devShells.${system}.default = pkgs.mkShell {
+        name = "mospkgs dev shell";
+        packages = with pkgs; [
+          cachix
+        ];
+      };
       overlays.default = import ./overlays;
       formatter."${system}" = pkgs.nixfmt-rfc-style;
     };
