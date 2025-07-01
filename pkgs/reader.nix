@@ -5,7 +5,7 @@
 }:
 
 let
-  version = "0.4.5";
+  version = "0.5.0";
 in
 
 pkgs.buildGoModule {
@@ -14,10 +14,10 @@ pkgs.buildGoModule {
 
   src = pkgs.fetchurl {
     url = "https://github.com/mrusme/reader/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-Knm0FaQ6hFCquwlFAJJPRk7SqMgTfGTsLFfFBsGRuB8=";
+    hash = "sha256-ds3ISgE+TsrVI08KvK75BbUCGj3E9yBE/bIPLeVlMJY=";
   };
 
-  vendorHash = "sha256-obYdifg3WrTyxgN/VtzgpL31ZOyPNtVT8UDQts0WodQ=";
+  vendorHash = "sha256-8IjN7hm5Rg9ItkxE9pbnkVr5t+tG95W9vvXyGaWmEIA=";
 
   meta = with lib; {
     description = "reader is for your command line what the “readability” view is for modern browsers: A lightweight tool offering better readability of web pages on the CLI.";
