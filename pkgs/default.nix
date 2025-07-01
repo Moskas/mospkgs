@@ -43,7 +43,6 @@
       inherit pkgs lib;
     };
     tickrs = (pkgs.callPackage ./tickrs.nix { });
-    zen-browser = (pkgs.callPackage ./zen.nix { }).specific;
     etterna = (pkgs.callPackage ./etterna/etterna.nix { });
     aporetic-sans-mono = (pkgs.callPackage ./fonts/aporetic.nix { });
     anifetch = import ./anifetch.nix {
@@ -54,7 +53,6 @@
         inputs
         ;
     };
-    nyxt = (pkgs.callPackage ./nyxt { });
     hakurei-reimu = (pkgs.callPackage ./cursors/reimu.nix { });
   };
 }
