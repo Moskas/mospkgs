@@ -2,6 +2,8 @@
 set -euo pipefail
 IFS=$'\n\t'  # safer word splitting
 
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
 # Get all package names from the flake
 packages=$(nix flake show --json | nix run nixpkgs#jq -- -r '.packages | to_entries[] | .value | keys[]')
 
