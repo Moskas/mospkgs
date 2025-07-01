@@ -2,32 +2,27 @@ name: Build and Push Packages to Cachix
 
 on:
   push:
-    branches:
-      - master
-
+  pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
       - name: Install Nix
-        uses: cachix/install-nix-action@v18
+        uses: cachix/install-nix-action@v25
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-
       - name: Install Cachix CLI
-        run: |
-          nix-env -iA nixpkgs.cachix
-
+        uses: cachix/cachix-action@14
+        with:
+          name: moskas
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Configure Cachix authentication
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
         run: |
           cachix authtoken $CACHIX_AUTH_TOKEN
-
       - name: Build and push packages
         run: |
           ./build-and-cache.sh
