@@ -25,7 +25,7 @@
   libXxf86vm,
 }:
 let
-  version = "0.74.3";
+  version = "0.74.4";
 in
 stdenv.mkDerivation {
   pname = "etterna";
@@ -34,7 +34,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/etternagame/etterna/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-P3fVVQclMHYV0EtrmaWV8ejjauWhW9mTJMuz9R/2dIg=";
+    hash = "sha256-sivTxBOB2uS/DevmTiNABCYwS5uGEHfcKTOIWRP0vMQ=";
   };
 
   # patches = [
