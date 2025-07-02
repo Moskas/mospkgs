@@ -9,13 +9,14 @@ nix flake show --json | nix run nixpkgs#jq -- '.packages.[].[].name' | awk '{ gs
 #+end_src
 
 #+RESULTS:
-| Packages:                 |
-|---------------------------|
-| epy-v2023.6.11            |
-| etterna-0.74.0            |
-| mpd-notify-rs-0.1.3       |
-| osu-lazer-bin-2024.1219.2 |
-| reader-master             |
-| tickrs-0.14.10            |
-| whdl-0.1.1                |
-| zen-browser-1.0.2-b.5     |
+| Packages:                |
+| anifetch-0.0.4           |
+| aporetic-sans-mono-1.0.0 |
+| epy-v2023.6.11           |
+| etterna-0.74.4           |
+| hakurei-reimu-1.0        |
+| mpd-notify-rs-0.1.3      |
+| osu-lazer-bin-2025.607.0 |
+| reader-0.5.0             |
+| tickrs-0.14.11           |
+| whdl-0.1.1               |
