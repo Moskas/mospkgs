@@ -9,4 +9,5 @@ final: prev: {
   etterna = prev.callPackage ../pkgs/etterna/etterna.nix { };
   anifetch = prev.callPackage ../pkgs/anifetch.nix { };
   hakurei-reimu = prev.callPackage ../pkgs/cursors/reimu.nix { };
+  haru-urara = prev.callPackage ../pkgs/cursors/haru.nix { };
 }

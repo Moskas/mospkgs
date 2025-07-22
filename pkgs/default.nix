@@ -54,5 +54,6 @@
         ;
     };
     hakurei-reimu = (pkgs.callPackage ./cursors/reimu.nix { });
+    haru-urara = (pkgs.callPackage ./cursors/haru.nix { });
   };
 }
