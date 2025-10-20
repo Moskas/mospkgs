@@ -33,9 +33,10 @@
         name = "mospkgs dev shell";
         packages = with pkgs; [
           cachix
+          nurl
         ];
       };
       overlays.default = import ./overlays;
-      formatter."${system}" = pkgs.nixfmt-rfc-style;
+      formatter."${system}" = pkgs.nixfmt-tree;
     };
 }
