@@ -55,5 +55,21 @@
     };
     hakurei-reimu = (pkgs.callPackage ./cursors/reimu.nix { });
     haru-urara = (pkgs.callPackage ./cursors/haru.nix { });
+    reddix = import ./reddix.nix {
+      inherit
+        pkgs
+        system
+        inputs
+        lib
+        ;
+    };
+    gitfetch = import ./gitfetch.nix {
+      inherit
+        pkgs
+        lib
+        system
+        inputs
+        ;
+    };
   };
 }
