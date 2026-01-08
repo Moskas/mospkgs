@@ -44,7 +44,6 @@
     };
     tickrs = (pkgs.callPackage ./tickrs.nix { });
     etterna = (pkgs.callPackage ./etterna/etterna.nix { });
-    aporetic-sans-mono = (pkgs.callPackage ./fonts/aporetic.nix { });
     anifetch = import ./anifetch.nix {
       inherit
         pkgs
@@ -54,22 +53,5 @@
         ;
     };
     hakurei-reimu = (pkgs.callPackage ./cursors/reimu.nix { });
-    haru-urara = (pkgs.callPackage ./cursors/haru.nix { });
-    reddix = import ./reddix.nix {
-      inherit
-        pkgs
-        system
-        inputs
-        lib
-        ;
-    };
-    gitfetch = import ./gitfetch.nix {
-      inherit
-        pkgs
-        lib
-        system
-        inputs
-        ;
-    };
   };
 }
