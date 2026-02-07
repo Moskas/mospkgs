@@ -5,13 +5,12 @@
 }:
 let
   pname = "osu-lazer-bin";
-  version = "2025.1209.0";
-
+  version = "2026.119.0";
   src =
     {
       x86_64-linux = pkgs.fetchurl {
         url = "https://github.com/ppy/osu/releases/download/${version}-lazer/osu.AppImage";
-        hash = "sha256-42Fx3CxLcW97cxRXXCqPJ8NzRBnpi62IjxGLnSRkO4g=";
+        hash = "sha256-lx8lU9tNXD90rpaKlIyR0C4eSivfmVAJP7Wq+n3Ht08=";
       };
     }
     .${pkgs.stdenv.system} or (throw "${pname}-${version}: ${pkgs.stdenv.system} is unsupported.");
