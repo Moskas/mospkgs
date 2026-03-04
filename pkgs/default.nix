@@ -31,6 +31,14 @@
         lib
         ;
     };
+    shinbun = import ./shinbun.nix {
+      inherit
+        pkgs
+        system
+        inputs
+        lib
+        ;
+    };
     epy = import ./epy.nix {
       inherit
         pkgs
