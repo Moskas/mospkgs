@@ -8,4 +8,5 @@ final: prev: {
   etterna = prev.callPackage ../pkgs/etterna/etterna.nix { };
   anifetch = prev.callPackage ../pkgs/anifetch.nix { };
   hakurei-reimu = prev.callPackage ../pkgs/cursors/reimu.nix { };
+  shinbun = prev.callPackage ../pkgs/shinbun.nix { };
 }
