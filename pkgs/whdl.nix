@@ -6,16 +6,16 @@
 
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "whdl";
-  version = "0.1.1";
+  version = "0.2.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "Moskas";
     repo = "whdl";
-    rev = "e23f3ef0e52c144039e669726835a43507e8b2cf";
-    hash = "sha256-snV/jTn6YagfYH+u7YJB0R5tUQWg5D5UQQPZtjzbQR8=";
+    rev = "b01f26e23ab09f57a0e927e5effbe2e746ff6d42";
+    hash = "sha256-JznUPzeulk5M+dhLp9hlZsEH8S724oMDyWzpPRGnZkY=";
   };
 
-  cargoHash = "sha256-X02+IL7RuEFmIYSSBgYNH1ZAMlkRiFdLg8ySUrynCOQ=";
+  cargoHash = "sha256-bwOKidxahdETbqRns0KzeuAhkNSHFHhoOTjZsTOIMoY=";
 
   nativeBuildInputs = with pkgs; [
     cmake
