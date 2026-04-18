@@ -12,31 +12,45 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        # Need for packages such as osu-bin
-        config.allowUnfree = true;
-      };
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       inherit (nixpkgs) lib;
+
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system;
+          # Required for packages such as osu-bin
+          config.allowUnfree = true;
+        };
+
+      # Build all packages for a system, filtered to those whose meta.platforms includes it.
+      # Packages without meta.platforms are included on all systems.
+      packagesForSystem =
+        system:
+        let
+          pkgs = pkgsFor system;
+          allPkgs = import ./pkgs { inherit pkgs; };
+        in
+        lib.filterAttrs (_: drv: builtins.elem system (drv.meta.platforms or [ system ])) allPkgs;
     in
     {
-      packages = import ./pkgs {
-        inherit
-          pkgs
-          system
-          inputs
-          lib
-          ;
-      };
-      devShells.${system}.default = pkgs.mkShell {
-        name = "mospkgs dev shell";
-        packages = with pkgs; [
-          cachix
-          nurl
-        ];
-      };
+      packages = lib.genAttrs systems packagesForSystem;
+
+      devShells = lib.genAttrs systems (system: {
+        default = (pkgsFor system).mkShell {
+          name = "mospkgs dev shell";
+          packages = with (pkgsFor system); [
+            cachix
+            nurl
+          ];
+        };
+      });
+
       overlays.default = import ./overlays;
-      formatter."${system}" = pkgs.nixfmt-tree;
+
+      formatter = lib.genAttrs systems (system: (pkgsFor system).nixfmt-tree);
     };
 }

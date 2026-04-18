@@ -1,12 +1,4 @@
-final: prev: {
-  reader = prev.callPackage ../pkgs/reader.nix { };
-  mpdnotify = prev.callPackage ../pkgs/mpdnotify.nix { };
-  whdl = prev.callPackage ../pkgs/whdl.nix { };
-  epy = prev.callPackage ../pkgs/epy.nix { };
-  osu-bin = prev.callPackage ../pkgs/osu-bin.nix { };
-  tickrs = prev.callPackage ../pkgs/tickrs.nix { };
-  etterna = prev.callPackage ../pkgs/etterna/etterna.nix { };
-  anifetch = prev.callPackage ../pkgs/anifetch.nix { };
-  hakurei-reimu = prev.callPackage ../pkgs/cursors/reimu.nix { };
-  shinbun = prev.callPackage ../pkgs/shinbun.nix { };
-}
+let
+  packagePaths = import ../pkgs/auto.nix;
+in
+final: prev: builtins.mapAttrs (_: path: prev.callPackage path { }) packagePaths

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  etterna = pkgs.callPackage ./etterna.nix { };
+  etterna = pkgs.callPackage ./package.nix { };
   script = pkgs.callPackage ./install.nix { };
   desktopFile = ./etterna.desktop;
 in
