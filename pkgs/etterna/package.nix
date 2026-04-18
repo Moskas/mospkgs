@@ -83,9 +83,8 @@ stdenv.mkDerivation {
   meta = with lib; {
     homepage = "https://www.etterna.com/";
     description = "Advanced cross-platform rhythm game focused on keyboard play";
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     license = licenses.mit;
     maintainers = [ ];
-    broken = stdenv.isLinux && stdenv.isAarch64;
   };
 }
