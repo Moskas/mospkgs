@@ -52,5 +52,8 @@
       overlays.default = import ./overlays;
 
       formatter = lib.genAttrs systems (system: (pkgsFor system).nixfmt-tree);
+
+      homeManagerModules = lib.mapAttrs (name: _: import ./modules/${name}.nix)
+        (lib.filterAttrs (n: _: n != "default") (builtins.readDir ./modules));
     };
 }
