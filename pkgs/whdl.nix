@@ -11,11 +11,11 @@ pkgs.rustPlatform.buildRustPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "Moskas";
     repo = "whdl";
-    rev = "b01f26e23ab09f57a0e927e5effbe2e746ff6d42";
-    hash = "sha256-JznUPzeulk5M+dhLp9hlZsEH8S724oMDyWzpPRGnZkY=";
+    rev = "d0885dfe09bb85a6dae5bc7efaf7b8ff9d435ab0";
+    hash = "sha256-CiIOZvSMxRkpO6Tgagj7kxRxLU9NzAuhOht9MO5M5/g=";
   };
 
-  cargoHash = "sha256-bwOKidxahdETbqRns0KzeuAhkNSHFHhoOTjZsTOIMoY=";
+  cargoHash = "sha256-ehs2w+kD0pFhATSEk4VGlCYcqQxLcWV8fWbDglEavPU=";
 
   nativeBuildInputs = with pkgs; [
     cmake
