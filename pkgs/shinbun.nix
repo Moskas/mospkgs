@@ -6,16 +6,14 @@
 
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "shinbun";
-  version = "0.1.0";
+  version = "0.2.1";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "Moskas";
-    repo = "shinbun";
-    rev = "1c360b387146b62ecb3787d91d7cd631461f4490";
-    hash = "sha256-+zS/2NzLS/CJZeWvgpUX5dZWpd4fflbbfLAyS4D+Mjs=";
+  src = pkgs.fetchurl {
+     url = "https://github.com/Moskas/shinbun/archive/refs/tags/v${version}.tar.gz";
+     hash = "sha256-gaqoL8KhypraCoR+6Bzr2kgLYgFk6B9tk73h7kPd15I=";
   };
 
-  cargoHash = "sha256-7aRDxxEcyOoLVf28frJ5PPze7ZKa5OKFxTPqeWYHxhY=";
+  cargoHash = "sha256-dtFGC/h77HFhd9PwuOrfwyUq5ScyIKKCvGgFDP4MQ0c=";
 
   nativeBuildInputs = with pkgs; [
     cmake
@@ -23,9 +21,9 @@ pkgs.rustPlatform.buildRustPackage rec {
     openssl
     sqlite
   ];
-  buildInputs = [
-    pkgs.openssl
-    pkgs.sqlite
+  buildInputs = with pkgs; [
+    openssl
+    sqlite
   ];
 
   meta = with lib; {
