@@ -6,14 +6,14 @@
 
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "shinbun";
-  version = "0.2.1";
+  version = "0.2.2";
 
   src = pkgs.fetchurl {
      url = "https://github.com/Moskas/shinbun/archive/refs/tags/v${version}.tar.gz";
-     hash = "sha256-gaqoL8KhypraCoR+6Bzr2kgLYgFk6B9tk73h7kPd15I=";
+     hash = "sha256-QA3Yk8Ll94BUp3kqbUCMT50arWtUH2Z4Nyh5fEov2bk=";
   };
 
-  cargoHash = "sha256-dtFGC/h77HFhd9PwuOrfwyUq5ScyIKKCvGgFDP4MQ0c=";
+  cargoHash = "sha256-4qz8sMl/tahsgnaSlI9ExyJS53+eKvikrPjL2BRtkzc=";
 
   nativeBuildInputs = with pkgs; [
     cmake
