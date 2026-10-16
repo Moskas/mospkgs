@@ -6,11 +6,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "dwproton";
-  version = "11.0-12";
+  version = "11.0-14";
 
   src = fetchurl {
     url = "https://dawn.wine/dawn-winery/dwproton/releases/download/dwproton-${finalAttrs.version}/dwproton-${finalAttrs.version}-x86_64.tar.xz";
-    hash = "sha256-+vNm1xJg40be5pYP9CbmkbkS4OwlQXdA6YHIrgWSRjA=";
+    hash = "sha256-xWPMmdRk+xmnZ6DrkNxyN0a/zdQCpP2qBzexKvCB+Zo=";
   };
 
   sourceRoot = "dwproton-${finalAttrs.version}-x86_64";
