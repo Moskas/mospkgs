@@ -35,9 +35,17 @@
           allPkgs = import ./pkgs { inherit pkgs; };
         in
         lib.filterAttrs (_: drv: builtins.elem system (drv.meta.platforms or [ system ])) allPkgs;
+
+      # Repackaged upstream binaries cost no build time but a lot of cache space, so only
+      # packages built from source are checks (built and pushed by CI).
+      # Set passthru.skipCache to opt out manually.
+      isCacheable =
+        drv: !(drv.skipCache or false) && !(lib.any (t: !t.isSource) (drv.meta.sourceProvenance or [ ]));
     in
     {
       packages = lib.genAttrs systems packagesForSystem;
+
+      checks = lib.genAttrs systems (system: lib.filterAttrs (_: isCacheable) (packagesForSystem system));
 
       devShells = lib.genAttrs systems (system: {
         default = (pkgsFor system).mkShell {

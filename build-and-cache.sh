@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
+# Builds flake checks (packages built from source) that are not yet in Cachix and pushes them.
+# Usage: ./build-and-cache.sh [--no-push]
 set -euo pipefail
-IFS=$'\n\t'  # safer word splitting
 
 export NIX_CONFIG="experimental-features = nix-command flakes"
 
-# Get all package names from the flake
-packages=$(nix flake show --json | nix run nixpkgs#jq -- -r '.packages | to_entries[] | .value | keys[]')
+args=(--flake ".#checks.${SYSTEM:-x86_64-linux}" --skip-cached --no-nom)
+[[ "${1:-}" == "--no-push" ]] || args+=(--cachix-cache "${CACHIX_CACHE:-moskas}")
 
-# Iterate over each package and build it
-for pkg in $packages; do
-  echo "Building package: $pkg"
-  #nix build ".#$pkg"
-  nix build --no-link --print-out-paths ".#$pkg" | cachix push moskas
-  echo "Finished building: $pkg"
-done
-
+nix run nixpkgs#nix-fast-build -- "${args[@]}"
