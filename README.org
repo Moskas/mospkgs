@@ -1,5 +1,81 @@
-#+title: mospkgs - Moskas' Packages
+#+title: mospkgs
 #+author: Moskas
-#+options: \n:t toc:nil
+#+options: toc:nil
 
-A repo for my custom packages with modules for personal projects or software that isn't packaged in [[https://github.com/NixOS/nixpkgs/][nixpkgs]]/ I want to bump manually to the more recent version.
+Nix flake with personal packages, patched or manually bumped versions of software from [[https://github.com/NixOS/nixpkgs][nixpkgs]], and home-manager modules.
+
+* Packages
+
+| Package         | Version | Description                                                |
+|-----------------+---------+------------------------------------------------------------|
+| =anifetch=      |   0.0.4 | Fetch-style CLI for AniList user stats                     |
+| =bun-baseline=  |  1.3.13 | Bun baseline build for CPUs without AVX2                   |
+| =dwproton=      | 11.0-12 | Dawn Winery's Proton build for Steam                       |
+| =etterna=       |  0.74.4 | Keyboard-focused rhythm game                               |
+| =hakurei-reimu= |     1.0 | Hakurei Reimu cursor theme                                 |
+| =mpdnotify=     |   0.1.3 | MPD notification daemon                                    |
+| =tickrs=        |  0.15.0 | Realtime ticker data in the terminal, with vim keybindings |
+| =whdl=          |   0.2.0 | wallhaven.cc batch downloader                              |
+
+All packages target =x86_64-linux=.
+
+* Usage
+
+** Flake input
+
+#+begin_src nix
+{
+  inputs.mospkgs.url = "github:Moskas/mospkgs";
+}
+#+end_src
+
+Use the overlay:
+
+#+begin_src nix
+nixpkgs.overlays = [ inputs.mospkgs.overlays.default ];
+#+end_src
+
+Or reference packages directly:
+
+#+begin_src nix
+environment.systemPackages = [ inputs.mospkgs.packages.x86_64-linux.whdl ];
+#+end_src
+
+Run without installing:
+
+#+begin_src bash
+nix run github:Moskas/mospkgs#anifetch
+#+end_src
+
+** Binary cache
+
+#+begin_src nix
+nix.settings = {
+  substituters = [ "https://moskas.cachix.org" ];
+  trusted-public-keys = [ "moskas.cachix.org-1:LcyLityXMILC1SenFSMMt7JgvUEOvS38Kza6b96TQEw=" ];
+};
+#+end_src
+
+** Home-manager modules
+
+#+begin_src nix
+{
+  imports = [ inputs.mospkgs.homeManagerModules.tickrs ];
+
+  mospkgs.programs.tickrs = {
+    enable = true;
+    symbols = [ "AMD" "NVDA" ];
+  };
+}
+#+end_src
+
+* Development
+
+#+begin_src bash
+nix develop                      # shell with cachix and nurl
+nix build .#<name>               # build a package
+nix fmt                          # format Nix files
+./build-and-cache.sh --no-push   # build all uncached packages
+#+end_src
+
+New packages go in =pkgs/<name>.nix= or =pkgs/<name>/package.nix= and are picked up automatically.
