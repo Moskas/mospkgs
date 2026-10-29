@@ -22,7 +22,7 @@
         system:
         import nixpkgs {
           inherit system;
-          # Required for packages such as osu-bin
+          # Required for packages such as dwproton
           config.allowUnfree = true;
         };
 
