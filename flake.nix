@@ -53,7 +53,8 @@
 
       formatter = lib.genAttrs systems (system: (pkgsFor system).nixfmt-tree);
 
-      homeManagerModules = lib.mapAttrs (name: _: import ./modules/${name}.nix)
-        (lib.filterAttrs (n: _: n != "default") (builtins.readDir ./modules));
+      homeManagerModules =
+        lib.mapAttrs' (file: _: lib.nameValuePair (lib.removeSuffix ".nix" file) (import ./modules/${file}))
+          (lib.filterAttrs (n: _: lib.hasSuffix ".nix" n && n != "default.nix") (builtins.readDir ./modules));
     };
 }
