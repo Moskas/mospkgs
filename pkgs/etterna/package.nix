@@ -6,7 +6,6 @@
   nasm,
   gtk2,
   glib,
-  ffmpeg_4,
   alsa-lib,
   libmad,
   libogg,
@@ -23,9 +22,14 @@
   libXpm,
   libXext,
   libXxf86vm,
+  vulkan-headers,
+  vulkan-loader,
+  shaderc,
+  glslang,
+  spirv-tools,
 }:
 let
-  version = "0.74.4";
+  version = "0.75.1";
 in
 stdenv.mkDerivation {
   pname = "etterna";
@@ -34,16 +38,26 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/etternagame/etterna/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-sivTxBOB2uS/DevmTiNABCYwS5uGEHfcKTOIWRP0vMQ=";
+    hash = "sha256-3sTEzj7AQ/bY3O9FrK+Fd8iN21IhNqbP3rFzU5zBnc0=";
   };
 
-  # patches = [
-  #   ./0001-fix-build-with-ffmpeg-4.patch
-  # ];
-
-  # postPatch = ''
-  #   sed '1i#include <ctime>' -i src/arch/ArchHooks/ArchHooks.h # gcc12
-  # '';
+  # Drop prebuilt ffmpeg 2.1.3 and Discord SDK blobs, video backgrounds fall back to Null
+  postPatch = ''
+    substituteInPlace CMakeLists.txt \
+      --replace-fail "set(SUPPORT_DISCORD_SDK ON)" "set(SUPPORT_DISCORD_SDK OFF)" \
+      --replace-fail "target_link_libraries(Etterna PRIVATE ffmpeg)" "" \
+      --replace-fail "SPIRV-Tools-opt)" "SPIRV-Tools-opt SPIRV-Tools)"
+    sed -i '/^ *\(MachineIndependent\|OSDependent\|GenericCodeGen\)$/d' CMakeLists.txt
+    sed -i '/^#error Something went wrong - Discord/d' src/Etterna/Singletons/GameState.cpp
+    substituteInPlace extern/CMakeLists.txt \
+      --replace-fail 'if(_proc STREQUAL "x86_64" AND UNIX AND NOT APPLE)' "if(FALSE)"
+    substituteInPlace src/arch/CMakeLists.txt \
+      --replace-fail 'elseif(''${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64") # Unix' "elseif(FALSE)"
+    sed -i \
+      -e '/extern\/ffmpeg\/linux-lib/,/DESTINATION/d' \
+      -e '/libdiscord_partner_sdk.so"/,/DESTINATION/d' \
+      CMake/Helpers/CPackSetup.cmake
+  '';
 
   nativeBuildInputs = [
     cmake
@@ -54,7 +68,6 @@ stdenv.mkDerivation {
   buildInputs = [
     gtk2
     glib
-    ffmpeg_4
     alsa-lib
     libmad
     libogg
@@ -70,15 +83,26 @@ stdenv.mkDerivation {
     libXpm
     libXext
     libXxf86vm
+    vulkan-headers
+    vulkan-loader
+    shaderc.dev
+    shaderc.static
+    glslang
+    spirv-tools.lib
   ];
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DWITH_SYSTEM_FFMPEG=1"
     "-DGTK2_GDKCONFIG_INCLUDE_DIR=${gtk2.out}/lib/gtk-2.0/include"
     "-DGTK2_GLIBCONFIG_INCLUDE_DIR=${glib.out}/lib/glib-2.0/include"
     "-DWITH_CRASHPAD=OFF"
+    "-DWITH_VULKAN_LINUX_EXTRAS=ON"
   ];
+
+  # vk-bootstrap dlopens libvulkan at runtime
+  postFixup = ''
+    patchelf --add-rpath ${lib.makeLibraryPath [ vulkan-loader ]} $out/Etterna/Etterna
+  '';
 
   meta = with lib; {
     homepage = "https://www.etterna.com/";
